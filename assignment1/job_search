@@ -1,0 +1,53 @@
+## Design a job search platform ##
+##		Author: Zehong Shen     ##
+##      Created on 1/13         ##
+
+
+##readme: //I'm assuming we don't need to consider the comanyportal here but just the userportal
+----------------------------------------------------------------------
+Class: UserPortal
+Data: username, password, email, phone,kills,intestedpositions,resume
+Behavior: loginApp, fillInProfile,selectPositions,selectSalaryRange,clickApply,uploadResume
+
+Class: Platform
+Data:jobs, userportal, companyportal
+Behavior: verifyEmailAdress, validate,searchMatch,getUserResume,message
+
+
+//Class: CompanyPortal
+//Data: jobs, positions
+//Behavior: getBack
+----------------------------------------------------------------------
+
+##Sequence of flow##
+User zehong
+Platform jobapp
+
+
+
+if signup:
+	zehong.signup(personalInfo)
+	jobapp.verifyEmailAdress()
+if login:
+	zehong.loginApp(username,password)	
+if	jobapp.validate()==True	
+		skills=zehong.kills
+		interstpostion=zehong.selectPostions()
+		salaryrange=zehong.selectSalaryRange()
+		jobs=jobapp.searchMatch(skills, interstpostion,salaryrange)
+		foreach job in jobs			
+			if zehong.clickApply()==True
+				resume=jobapp.getUserResume()
+				if resume==null
+					zehong.uploadResume(resume)									
+			zehong.clickSend()
+			if send is success
+				print("Resume has been sent")					
+					
+else
+    validate.failed(errors)
+    validate.recollectionUserinfo(username,passoword)
+End	
+	
+	
+ 
