@@ -1,0 +1,54 @@
+## Design an app to book a doctor's appointment use your medical insurance provider ##
+##		Author: Zehong Shen                           ##
+##      Created on 1/14                               ##
+
+----------------------------------------------------------------------
+
+Class:User
+Data: name, password, phone, email
+Behavior: loginApp, tryfindDoctor,fillInReserve, fillInsuranceProvider, selectSchedule,confirm
+
+Class:App
+Data: schedulecalendar, doctorprofiles, doctornames
+Behavior: validate, getDoctorprofile,checkDoctorScheule,findDoctor,getInsuranceProvider,reserve
+
+Class:InsuranceProvider
+Data: providername
+----------------------------------------------------------------------
+
+##Sequence of flow##:
+
+User zehong
+App myhealthapp 
+InsuranceProvider healthcare
+
+if signup:
+	zehong.signup(personalInfo)
+	myhealthapp.verifyEmailAdress()
+if login:
+	zehong.loginApp(username,password)
+	myhealthapp.validate()
+
+if myhealthapp.validate()==true
+	
+	insuranceProvider=myapp.getInsuranceProvider()
+	if insuranceProvider==null
+		zehong.fillInsuranceProvider()
+	if zehong.tryfindDoctor()==True		
+	ArryList doctors=myapp.findDoctor(insuranceProvider) //use insuranceProvide as condition, only doctors in this insurance network would be returned
+		foreach doctor in doctors
+		  {myapp.getDoctorProfile(doctors)}
+		doctor=zehong.selectDoctor()
+		myapp.checkDoctorScheule(doctor,date)		
+		if doctorprofile.schedulecalendar==available
+			zehong.selectSchedule()
+			zehong.confirm(doctor,schedule)					
+			if myapp.reserve()==true
+			   print("Successfully booked")	
+			
+
+else
+    validate.failed(errors)
+    validate.recollectionUserinfo(username,passoword)
+End	
+
