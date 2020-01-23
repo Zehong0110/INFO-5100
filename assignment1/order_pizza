@@ -1,0 +1,50 @@
+## order pizza from domino      ##
+##		Author: Zehong Shen     ##
+##      Created on 1/14        ##
+
+----------------------------------------------------------------------------------
+Class: User
+Data: name, password, address,phone,location
+Behavior:loginApp,selectItems,addItemsToCart,checkOut,placeOrder
+
+Class: Dominos
+Data: stores, items, customerinfo, disaccount, ordertotal,orderstatus
+Behavior:validate,requestToObtainLocation,displayNearbyStore,displayHotMenu,getCart
+getDiscount, checkCustomerInfo, getOrderTotal,displaySummery,displayPickupTime,
+sendTextMessage
+------------------------------------------------------------------------------------
+
+##Sequence of flow##:
+
+User zehong
+Domino mobileapp
+
+zehong.loginApp(name, password)
+if mobileapp.validate()==true
+   mobileapp.requestToObtainLocation()
+   if response is allowed
+   	   mobileapp.displayNearbyStore()
+   store=zehong.selectStore()
+   mobileapp.displayHotMenu()
+   items=zehong.selectItems()
+   zehong.addItemsToCart(items)
+   if (mobileapp.cart !=null && zehong.checkOut==true)
+		Items items=mobileapp.getCart()
+		customerinfo = mobileapp.checkCustomerInfo()
+		discount = mobileapp.getDiscount()
+		ordertotal = mobileapp.getOrderTotal()
+		mobileapp.displaySummery()			
+		if (zehong.placeOrder==true)		
+			mobileapp.createOrder(items, customerinfo, discount)
+			mobileapp.deductMoney(ordertotal)
+						
+		if mobileapp.createOrder is success
+			mobileapp.displayPickupTime()
+			if orderstatus=="ready"
+				mobileapp.sendTextMessage("order ready to pick up")
+				
+else
+    validate.failed(errors)    
+    validate.recollectionUserinfo(username,passoword)
+    
+End	  

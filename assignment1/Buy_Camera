@@ -1,0 +1,80 @@
+## Buy a camera from Amazon.com ##
+##		Author: Zehong Shen     ##
+##      Created on 1/13         ##
+
+----------------------------------------------------------------------
+Class: User
+Data: username, password, personalinfo
+Behavior:
+1. loginApp:Login into Amazon.com
+2. findCamera:Browse the wanted camera
+3. addCart:Add the wanted camera to cart
+4. checkout:Proceed to checkout
+5. addPersonalInfo:Fill in the billing information and shipping address
+6. applyDisaccount: Optional, Enter a discount code or a gift card 
+7. placeOrder:Place the order
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+Class: Amazon
+Data: username, iteminfo, cart, order, customerinfo, membership,discount,orderTotal
+Behavior:
+1. Validate: Validate customer's credential
+2. displayItem: Display the results of customer's search for camera
+3. getCart: check items in shopping cart
+4. getCustomerInfo: Check if customer is Prime, has billing information and shipping address stored, otherwise ask for fill in.
+5. getDiscount:Apply discount code or gift card entered by customers
+6. getOrderTotal: Calculate the final price that customer need to pay
+7. displayOrderSummery: display order summary for review
+8. createOrder:Create an order and generate an order number
+9. deductMoney: send money deduct request to Bank
+----------------------------------------------------------------------
+
+##Sequence of flow##
+
+User zehong
+Amazon amazonmobileapp
+Camera camera
+
+
+zehong.loginApp(username,password) -> amazonmobileapp
+
+if (amazonmobileapp.validate==true)
+    camera=zehong.findCamera()
+	zehong.addCart(camera)
+	
+	if (amazonmobileapp.cart !=null && zehong.checkOut==true)
+		
+		items = amazonmobileapp.getCart()
+		zehong.addPersnoalInfo(personalinfo)
+		customerinfo = amazonmobileapp.checkCustomerInfo()
+		zehong.applyDisaccount(discount)
+		discount = amazonmobileapp.getDiscount()
+		ordertotal = amazonmobileapp.getOrderTotal()		
+		amazonmobileapp.displayOrderSummery()	
+		if (zehong.placeOrder()==true)		
+			amazonmobileapp.createOrder(discount, ordertotal, customerinfo)
+			amazonmobileapp.deductMoney(ordertotal)	
+		else
+		
+	else
+	
+			
+else:
+    validate.failed(errors)
+    validate.recollectionUserinfo(username,passoword)
+End
+
+
+
+
+
+
+
+
+
+
+
+
+
+

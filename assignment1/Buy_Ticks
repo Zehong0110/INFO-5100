@@ -1,0 +1,62 @@
+## Design a platform for buying ticks for local event ##
+##		Author: Zehong Shen                           ##
+##      Created on 1/13                               ##
+
+----------------------------------------------------------------------------------
+
+Class: Customer
+Data: username, password, personalInfo, inputnumber
+Behavior: signup, login, selectEvent, input, checkOut, fillPersonalinfo, placeOrder
+
+Class:Platform
+Data:  customerinfo,ordertotal,servicefee
+Behavior: validate, getCustomerinfo, createOrder, charge
+
+Class:Tick
+Data: event, price, tickavaliableamount
+
+-----------------------------------------------------------------------------------
+
+##Sequence of flow##
+
+Customer zehong
+Platform platform
+Tick tedx
+
+if signup:
+	zehong.signup(personalInfo)
+	platform.verifyEmailAdress()
+if login:
+	zehong.loginApp(username,password)
+	platform.validate()
+
+if platform.validated()==True
+	ticks=zehong.selectEvent()
+    if tickavaliableamount==0:
+       print ("sold out")
+    else
+	inputnumber=zehong.input(number)	
+	if tickavaliableamount>=inputnumber
+		if zehong.checkout==True		
+		customerinfo=platform.getCustomerInfo()
+		if customerinfo==null
+			zehong.fillPersonalinfo()
+			if zehong.placeOrder==True
+				platform.creatOrder(customerinfo, ordertotal)
+				platform.charge(ordertotal)
+			else			
+			
+	else
+	    print("Not enough ticks available")	
+	
+
+else
+    validate.failed(errors)
+    validate.recollectionUserinfo(username,passoword)
+End	
+
+
+
+
+
+
